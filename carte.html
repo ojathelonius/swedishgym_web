@@ -1,0 +1,110 @@
+<!-- PROJET VISUALISATION 2
+VERSION 1.0 - 08/06/2015 -->
+
+<div ng-controller="carteCtrl">
+
+<ul class="nav nav-pills nav-justified">
+  <li ng-class="{'active':mapView}" ng-click="changeMapView(true)">
+  	<a href="#">
+  		<span class="glyphicon glyphicon-globe"></span>
+  	</a>
+  </li>
+  <li ng-class="{'active':!mapView}" ng-click="changeMapView(false)">
+  	<a href="#">
+  		<span class="glyphicon glyphicon-search"></span>
+  	</a>
+  </li>
+</ul>
+
+
+<div ng-show="mapView"> 
+	<div id="mapid"></div>
+</div>
+
+
+
+<div id="annuaireCtrl" ng-show="!mapView">
+ 
+    <!-- Champ de recherche -->
+	<div class="form-group" style="margin-left:180px;">
+	    <input type="text" class="form-control" ng-model="salleRecherche" ng-change="changerSalleRecherche(salleRecherche)" placeholder="Nom de la salle recherchée" style="height:40px;">
+	</div>
+
+
+	<!-- Affichage du nombre de résultats et de tuiles sélectionnéées -->
+	<div class="page-header" style="margin-top:0px;">
+		<h1 style="margin-bottom:0px;">
+			<small style="font-size:14px;margin-left:15px;">
+    			{{(listeSalles|filter:{classroom_name:salleRecherche}).length}} salle{{((listeSalles|filter:{classroom_name:salleRecherche}).length>1)?'s':''}} -
+    			{{(sallesSelectionnees|filter:{classroom_name:salleRecherche}).length}} sélectionnée{{((sallesSelectionnees|filter:{classroom_name:salleRecherche}).length>1)?'s':''}}
+    		</small>
+    	</h1>
+    </div>
+
+	<!-- Tuiles -->
+	<section id="photos" class="four">
+		<div ng-repeat="salle in listeSalles | filter:{classroom_name:salleRecherche} | orderBy:indexOfClassroomSelected:true | limitTo:20" ng-class="{'selected':(indexOfClassroomSelected(salle)>-1)?'true':false}"><!-- pour la sélection multiple  | orderBy:indexOfClassroomSelected:true -->
+
+			<img ng-src="{{salle.classroom_photo_large_url}}" ng-click="changerSalleCourante(salle)" data-toggle="modal" data-target=".bs-example-modal-lg" onerror="this.src='https://design.gymsuedoise.com/USER20160406/location/location_defaultpic.jpg';" />
+
+			<span class="bandeau" ng-click="addOrRemoveClassroom(salle)">
+				{{salle.classroom_name | limitTo:35 }}{{(salle.classroom_name.length > 35) ? '...' : ''}}
+			</span>
+
+		</div>
+	</section>
+
+	<!-- Popup -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  	<div class="modal-dialog modal-lg">
+	    	<div class="modal-content" ng-style="{'background-image': 'url(' + salleCourante.classroom_photo_large_url + ')'}">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title" id="myModalLabel">{{salleCourante.classroom_name}}</h4>
+	      		</div>
+	      		<div class="modal-body">
+	        		<img ng-src="https://api.mapbox.com/v4/mapbox.streets/pin-m+2A3F54({{salleCourante.classroom_gps_lon}},{{salleCourante.classroom_gps_lat}})/{{salleCourante.classroom_gps_lon}},{{salleCourante.classroom_gps_lat}},17/450x250.png?access_token=pk.eyJ1Ijoib2phdGhlbG9uaXVzIiwiYSI6ImNpbzV0bXVmNDAwNHV2eWtwa2ZycnhrMXIifQ.6YqVmLEfFdRV4k9a_KY5gg" id="planAcces" />
+
+	        		<h4>Adresse</h4>
+	        		{{salleCourante.classroom_address}}<br />
+	        		{{salleCourante.classroom_zip}}  {{salleCourante.classroom_city}}<br />
+	        		{{getCountryFromCity(salleCourante.classroom_city)}}
+	        		<br /><br />
+
+					<h4>{{(salleCourante.classroom_description=='')?'':'Description'}}</h4>
+					<p ng-bind-html="salleCourante.classroom_description" style="margin-bottom:30px;"></p>
+
+					<table>
+						<tr>
+					        <td>
+					        	<span class="glyphicon glyphicon-user"></span><br />
+					        	Capacité de<br />
+					        	{{salleCourante.classroom_capacity}} personnes
+					        </td>
+					        <td ng-class="{'disabled':(salleCourante.classroom_feature_parking==0)}">
+					        	<i class="fa fa-car" aria-hidden="true" style="margin-bottom:5px;"></i><br />
+					        	Parking
+					        </td>
+					        <td ng-class="{'disabled':(salleCourante.classroom_feature_shower==0)}">
+					        	<span class="glyphicon glyphicon-tint"></span><br />
+					        	Douche
+					        </td>
+					        <td ng-class="{'disabled':(salleCourante.classroom_feature_locker==0)}">
+					        	<span class="glyphicon glyphicon-lock"></span><br />
+					        	Casiers
+					        </td>
+					        <td ng-class="{'disabled':(salleCourante.classroom_feature_credit==0)}">
+					        	<span class="glyphicon glyphicon-credit-card"></span><br />
+					        	Carte de crédit<br />acceptée
+					        </td>
+				        </tr>
+					</table>
+
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+
+</div>
+
+</div>

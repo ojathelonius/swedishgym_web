@@ -1,0 +1,555 @@
+#calendrierCtrl .panel {
+  text-align: center;
+  min-width: 180px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+  /*    transition: box-shadow 0.3s ease-in-out; ajoute une transition mais sur toutes les propriétés, donc bug d'affichage */
+
+    -webkit-box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+#calendrierCtrl .panel:before {
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    -moz-border-radius: 100px / 10px;
+    border-radius: 100px / 10px;
+
+
+
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 50%;
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    /* box-shadow: 0 0 15px rgba(0,0,0,0.6); */
+    -moz-border-radius: 10px / 100px;
+    /* border-radius: 10px / 100px; */
+}
+
+.label-default {
+    background-color: rgba(42,63,84,0.73);
+}
+.label-warning{
+    background-color: #A46A19;
+}
+
+
+@font-face{
+    font-family: 'DIN_classic';
+    src: url('../fonts/DINNextLTPro-Regular.otf');
+}
+
+body{
+    font-family: Helvetica, Calibri, DIN_classic;
+}
+
+
+/*#calendrierCtrl .panel:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+*/
+
+#calendrierCtrl .panel:focus {
+  outline: none;
+}
+
+#calendrierCtrl .periodTile {
+  margin:25px 40px;
+  /*max-width: 260px;*/
+}
+
+#calendrierCtrl .monthTile {
+  margin:25px 40px;
+  max-width: 180px;
+}
+
+#calendrierCtrl .dayTile {
+  margin: 10px;
+  min-width: 120px;
+}
+
+#calendrierCtrl .tile-disabled {
+    opacity: 0.3;
+}
+#calendrierCtrl .panel-danger {
+    color: #4D4D4D;
+}
+#calendrierCtrl .panel:not(.panel-danger) {
+    color: #4D4D4D;
+}
+
+#calendrierCtrl .firstLetterUppercase:first-letter {text-transform: uppercase}
+
+#calendrierCtrl .listeCours td {
+    vertical-align: middle;
+}
+
+#calendrierCtrl .glyphicon-tag {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.nav-justified {
+    position: absolute;
+    top: 0px;
+    z-index: 401;
+    width: 150px;
+    margin-left: 15px;
+}
+
+.nav-justified .glyphicon {
+    top:4px;
+}
+
+.nav-justified li a, .nav-justified li a:hover, .nav-justified li.active a, .nav-justified li.active a:hover, .nav-justified li.active a:focus {
+    background-color: #2A3F54;
+    color: white;
+    padding: 6px 0px 8px 0px;
+    font-size: 18px;
+}
+
+.label{
+    font-size:80%;
+}
+.nav-justified li.active a {
+    box-shadow: inset 0 0 7px #000000;
+}
+
+.nav-justified li:first-child a {
+    border-radius: 4px 0px 0px 4px;
+}
+
+.nav-justified li:last-child a {
+    border-radius: 0px 4px 4px 0px;
+}
+
+
+#mapid {
+   height:700px;
+   width: calc(100% + 70px);
+   top: -20px;
+   left: -35px;
+}
+.leaflet-popup-content {
+    min-width: 300px;
+    margin: 6px 6px;
+    line-height: 1.4;
+}
+.panel {
+   margin-bottom: 10px;
+}
+.panel-footer {
+   padding: 0px 0px;
+   overflow:hidden;
+}
+.panel-body {
+   padding: 12px 20px;
+}
+.classroom_description {
+   margin-top:20px;
+   font-style: italic;
+   padding:13px;
+   margin-bottom:5px;
+}
+.popup.glyphicon{
+   margin-right:5px;
+}
+.infos_liste{
+   list-style: none;
+   margin-left:2px;
+   margin-bottom:5px;
+}
+.inline_li{
+   display: inline;
+   margin-right:8px;
+}
+.fa-lg{
+   margin-right:4px;
+}
+.header_salle{
+   padding:3px;
+}
+.salle_title{
+   position:relative;
+   top: 8px;
+   left:5px;
+   font-size:1.1em;
+}
+.panel-danger>.panel-heading {
+   color: white;
+   background-color: #B54242;
+   border-color: #B54242;
+}
+
+.panel-danger {
+   border-color: #B54242;
+}
+.navbar{
+   margin-bottom:0px;
+   background-color:#2A3F54;
+   border-color: #2A3F54;
+   border-radius:0px;
+   box-shadow: 2px 2px 4px #1c1a19;
+}
+#champ_recherche{
+   top:2px;
+}
+#sidebar-wrapper{
+   box-shadow: 2px 2px 5px #1c1a19;
+}
+#logo-titre{
+   padding:0px;
+   font-size:1.9em;
+}
+.text-orange{
+   font-family: Calibri;
+   font-style: italic;
+   color:#FBBC1E;
+}
+.text-white{
+   font-family: Calibri;
+   font-style: italic;
+   color:white;
+}
+#sigle-GS{
+   height:30px;
+   position:relative;
+   bottom:5px;
+}
+.media-left:focus {
+    outline: none;
+}
+.sidebar-nav > .sidebar-brand{
+   height:auto;
+}
+.glyphicon-menu-hamburger{
+   font-size: 1.2em;
+   color:white;
+}
+.chip .tag{
+   max-width:100px;
+   font-size:1.1em;
+}
+#footer-credits{
+   background-color: white;
+   border:none;
+   box-shadow: none;
+   margin-top: 50px;
+   color:#AFAFAF;
+}
+#page-content-wrapper{
+   min-height:600px;
+   margin-top:50px;
+}
+.chip{
+   margin-left:15px;
+   margin-bottom: 11px;
+}
+.chip-menu{
+    background:none;
+    color:white;
+    font-size: 15px;
+}
+
+.chip-filtre{
+    background-color:white;
+/*    -moz-box-shadow:    inset 0 0 7px #000000;
+    -webkit-box-shadow: inset 0 0 7px #000000;
+    box-shadow:         inset 0 0 7px #000000;*/
+    color:black;
+}
+.sidebar-nav li{
+   text-indent: 15px;
+}
+.sidebar-nav .glyphicon {
+    top: 5px;
+    font-size: 22px;
+}
+.chip-static{
+   background:rgba(0,0,0,0);
+}
+.media, .media-body{
+   overflow:visible;
+}
+.navbar-brand{
+   max-width: 90%;
+}
+/*Annuaire, grille de photos responsive*/
+#photos *:focus{
+   outline: none;
+}
+
+#photos.four {
+    /* Prevent vertical gaps */
+    line-height: 0;
+    
+    -webkit-column-count: 4;
+    -webkit-column-gap:   0px;
+    -moz-column-count:    4;
+    -moz-column-gap:      0px;
+    column-count:         4;
+    column-gap:           0px;
+}
+
+#photos.seven {
+    /* Prevent vertical gaps */
+    line-height: 0;
+    
+    -webkit-column-count: 7;
+    -webkit-column-gap:   0px;
+    -moz-column-count:    7;
+    -moz-column-gap:      0px;
+    column-count:         7;
+    column-gap:           0px;
+}
+
+#photos div.selected {
+   margin: 5px 10px;
+}
+
+#photos div:not(.selected) {
+    margin: 10px 5px;
+}
+
+#photos div img:first-of-type {
+   /* Just in case there are inline attributes */
+   width: 100% !important;
+   height: auto !important;
+   border-radius: 2px;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+   cursor: pointer;
+   min-height: 100px;
+}
+
+#photos div.selected img:first-of-type {
+    border: 8px solid #c6801f; /* thème vert --> dashed #267826 */
+}
+
+#photos  div .bandeau {
+    background: rgba(0, 0, 0, 0.67);
+    padding: 7px 10px;
+    position: relative;
+    bottom: 25px;
+    color: white;
+    border-radius: 0px 2px 2px 0px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.breadcrumb{
+    background-color: rgba(49,70,92,0.16);
+}
+
+
+#photos div.selected .bandeau:before {
+    content: "✔"; /* thème vert url('https://cdn0.iconfinder.com/data/icons/fatcow/16/tick.png'); */
+        /*position: relative;
+        top: 4px;*/
+        font-size: 14px;
+        margin-right: 3px;
+    }
+
+    #photos div.selected .bandeau {
+        background: #c6801f; /* thème vert --> #267826 */
+        bottom: 40px;
+    }
+
+    
+    @media (max-width: 1200px) {
+      #photos {
+        -moz-column-count:    4;
+        -webkit-column-count: 4;
+        column-count:         4;
+      }
+    }
+    @media (max-width: 1000px) {
+      #photos {
+        -moz-column-count:    3;
+        -webkit-column-count: 3;
+        column-count:         3;
+      }
+    }
+    @media (max-width: 800px) {
+      #photos {
+        -moz-column-count:    2;
+        -webkit-column-count: 2;
+        column-count:         2;
+      }
+    }
+    @media (max-width: 400px) {
+      #photos {
+        -moz-column-count:    1;
+        -webkit-column-count: 1;
+        column-count:         1;
+      }
+    }
+
+
+
+
+
+    /*Annuaire, onglet équipe*/
+    .icone-animateur {
+      background: url('https://design.gymsuedoise.com/USER20160529/img/memberaccount/memberaccount_teach.png') no-repeat left 50%;
+      padding-left: 25px;
+    }
+
+    .icone-hote {
+      background: url('https://design.gymsuedoise.com/USER20160529/img/memberaccount/memberaccount_host.png') no-repeat left 50%;
+      padding-left: 25px;
+    }
+
+
+
+
+    /*Annuaire, onglet salles*/
+    #annuaireCtrl .modal-content {
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+      background-size: cover;
+    }
+
+    #annuaireCtrl .modal-content, #annuaireCtrl .close {
+      color: white;
+    }
+
+    #annuaireCtrl .modal-header, #annuaireCtrl .modal-body {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #annuaireCtrl .modal-header {
+      border-radius: 6px 6px 0px 0px;
+    }
+
+    #annuaireCtrl .modal-body {
+      border-radius: 0px 0px 6px 6px;
+    }
+
+    #annuaireCtrl .modal-body .glyphicon, #annuaireCtrl .modal-body .fa-car {
+      font-size:30px;
+    }
+
+    #annuaireCtrl .modal-body #planAcces {
+      float: left;
+      margin: 0px 20px 20px 0px;
+        border-radius: 2px;
+    }
+
+    #annuaireCtrl .modal-body #photoStaff {
+        float: left;
+        margin: 0px 20px 20px 0px;
+        border-radius: 2px;
+        height: 300px;
+        max-width: 300px;
+    }
+
+    #annuaireCtrl .modal-body #photoStaff:after {
+      content: "";
+      clear: both;
+      display: table;
+  }
+  #annuaireCtrl .modal-body h4 {
+     font-weight: bold;
+ }
+
+ #annuaireCtrl .modal-body table {
+     text-align: center;
+     width: 100%;
+     table-layout: fixed;
+ }
+
+ #annuaireCtrl .modal-body td {
+     vertical-align: top;
+ }
+
+ #annuaireCtrl .modal-body td.disabled {
+     color: rgba(255,255,255,0.25);
+ }
+ .bouton-voir-salle{
+    cursor:pointer;
+}
+.profil-gest{
+    background-color: #D8D8D8;
+    margin:15px;
+    border:none;
+    -moz-box-shadow:    inset 0 0 7px #000000;
+    -webkit-box-shadow: inset 0 0 7px #000000;
+    box-shadow:         inset 0 0 7px #000000;
+}
+.photo-gest{
+    box-shadow: 3px 3px 5px #C1C1C1;
+}
+.text-gest{
+    color:#2A3F54;
+}
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+@media (min-width: 768px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+}
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+}
+}
+
+@media (min-width: 1200px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+}
+}
+.tuile{
+    height:200px;
+}
+.row .seven-cols{
+    width:100%;
+}
+#profil-gest{
+    margin-right:10px;
+}
+#text-gest{
+    color:white;
+}
+#bouton-deconnect{
+    color:white;
+    background-color:#2A3F54;
+}
+li.dropdown.open{
+    background-color:#2A3F54;
+}
+a#text-gest.dropdown-toggle{
+ background-color:#2A3F54;
+}
+a#text-gest.dropdown-toggle:hover{
+    background-color:#324A61;
+}

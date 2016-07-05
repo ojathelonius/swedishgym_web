@@ -1,0 +1,58 @@
+ [
+ {
+ 	"id" : 30,
+ 	"intensite" : "Standard"
+ },
+  {
+ 	"id" : 49,
+ 	"intensite" : "Running"
+ },
+  {
+ 	"id" : 31,
+ 	"intensite" : "75'"
+ },
+  {
+ 	"id" : 46,
+ 	"intensite" : "Cardio Pump"
+ },
+  {
+ 	"id" : 60,
+ 	"intensite" : "Famille"
+ },
+  {
+ 	"id" : 20,
+ 	"intensite" : "Basic"
+ },
+  {
+ 	"id" : 95,
+ 	"intensite" : "Core"
+ },
+  {
+ 	"id" : 40,
+ 	"intensite" : "Intensif"
+ },
+  {
+ 	"id" : 45,
+ 	"intensite" : "Cardio Flex"
+ },
+  {
+ 	"id" : 96,
+ 	"intensite" : "Flex"
+ },
+  {
+ 	"id" : 65,
+ 	"intensite" : "Clubbing"
+ },
+  {
+ 	"id" : 50,
+ 	"intensite" : "Modéré"
+ },
+  {
+ 	"id" : 67,
+ 	"intensite" : "Dance"
+ },
+  {
+ 	"id" : 47,
+ 	"intensite" : "Circuit"
+ }
+ ]

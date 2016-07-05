@@ -1,0 +1,77 @@
+<!-- PROJET VISUALISATION 2
+VERSION 1.0 - 08/06/2015 -->
+
+<div ng-controller="annuaireCtrl" id="annuaireCtrl">
+
+	<!-- Champ de recherche -->
+	<div class="form-group">
+		<input type="text" class="form-control" ng-model="personneRecherchee" ng-change="changerPersonneRecherchee(personneRecherchee)" placeholder="Nom de la personne recherchée" style="height:40px;">
+	</div>
+
+
+	<!-- Affichage du nombre de résultats et de tuiles sélectionnéées -->
+	<div class="page-header" style="margin-top:0px;">
+		<h1 style="margin-bottom:0px;">
+			<small style="font-size:14px;margin-left:15px;">
+				{{(listeProfs|filter:{staff_name:personneRecherchee}).length}} personne{{((listeProfs|filter:{staff_name:personneRecherchee}).length>1)?'s':''}} -
+				{{(personnesSelectionnees|filter:{staff_name:personneRecherchee}).length}} sélectionnée{{((personnesSelectionnees|filter:{staff_name:personneRecherchee}).length>1)?'s':''}}
+			</small>
+		</h1>
+	</div>
+
+	<!-- Tuiles -->
+	<section id="photos" class="seven">
+		<div ng-repeat="prof in listeProfs | filter:{staff_name:personneRecherchee} | orderBy:indexOfStaffSelected:true | limitTo:20" ng-class="{'selected':(indexOfStaffSelected(prof)>-1)?'true':false}"><!-- pour la sélection multiple  | orderBy:indexOfStaffSelected:true -->
+
+			<img ng-src="{{prof.staff_photo_large_url}}" ng-click="changerPersonneCourante(prof)" data-toggle="modal" data-target=".bs-example-modal" onerror="this.src='./images/user-photo-missing.png';" />
+
+			<span class="bandeau" ng-click="addOrRemoveStaff(prof)">
+				{{prof.staff_name | limitTo:35 }}{{(prof.staff_name.length > 35) ? '...' : ''}}
+			</span>
+
+		</div>
+	</section>
+
+	<!-- Popup -->
+	<div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background:white;color:#505050;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#000;"><span aria-hidden="true">&times;</span></button>
+
+					<h4 class="modal-title" id="myModalLabel">Informations personnelles</h4>
+					
+				</div>
+				<div class="modal-body" style="background:white;color:#505050;">
+					<img ng-src="{{personneCourante.staff_photo_large_url}}" id="photoStaff" onerror="this.src='./images/user-photo-missing.png';" />
+
+					<h4 style="font-size:30px;text-transform: uppercase;">{{personneCourante.staff_name}}</h4>
+					<h4>
+						{{(personneCourante.staff_is_teacher==1)?'Animatrice':''}}
+						{{(personneCourante.staff_is_teacher==1 && personneCourante.staff_is_host==1)?' & ':''}}
+						{{(personneCourante.staff_is_host==1)?'Hôte':''}}
+					</h4><br />
+					
+					<h4>Adresse</h4>
+					29 avenue des courlis<br />
+					74260  Le Villaret<br />
+					France<br /><br />
+					
+
+					<h4>Contact</h4>
+					<span class="glyphicon glyphicon-phone-alt" style="font-size:15px;"></span> 06 62 87 34 54<br />
+					<span class="glyphicon glyphicon-envelope" style="font-size:15px;"></span> {{personneCourante.staff_name.split(' ').join('') | lowercase }}@gmail.com<br />
+
+					<br />
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
